@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Nodemailer Email Example</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Dashboard (Users List)</h1>
+        <h5>Hey you are Logged in !</h5>
+        <%= token %>
+            <table border="1">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Date</th>
+                </tr>
+                <% users.forEach(function(user){ %>
+                    <tr>
+                        <td>
+                            <%- user.name %>
+                        </td>
+                        <td>
+                            <%- user.email %>
+                        </td>
+                        <td>
+                            <%- user.date %>
+                        </td>
+                    </tr>
+                    <%});%>
+            </table>
+            <div>
+                <a href="/user">Go to Home </a>
+            </div>
+            <div>
+                <form action="/user/logout" method="post">
+                    Click here to Logout <button>Logout</button>
+                </form>
+            </div>
+    </div>
+</body>
+
+</html>
