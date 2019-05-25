@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 const redirectLogin = (req, res, next) => {
     console.log('**********', req.session.id);
     if (!req.session.id) {
-        res.redirect('/user/login');
+        res.redirect(`${request.baseUrl}/login`);
     } else {
         next()
     }
@@ -18,7 +18,7 @@ const redirectHome = (req, res, next) => {
     if (!req.session.id) {
         next();
     }
-    res.redirect('/user/login');
+    res.redirect(`${request.baseUrl}/login`);
 }
 
 router.post('/logout', (request, response) => {
@@ -26,7 +26,7 @@ router.post('/logout', (request, response) => {
     request.session.destroy((err) => {
         if (err) res.redirect('/dashboard');
         response.clearCookie(process.env.SESSION_NAME);
-        response.redirect('/user/login');
+        response.redirect(`${request.baseUrl}/login`);
     })
 })
 
@@ -43,7 +43,7 @@ router.post('/login', (request, response) => {
                 const userExist = (email === user.email && isMatch);
                 if (userExist) {
                     request.session.id = user._id;
-                    response.redirect('/user/dashboard');
+                    response.redirect(`${request.baseUrl}/dashboard`);
                 } else {
                     console.log('Unable to Login !');
                     response.send('Unable to Login ! :) ')

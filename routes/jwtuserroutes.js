@@ -5,7 +5,17 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 router.post('/logout', (request, response) => {
-    console.log('Logout #############', request.session);
+    console.log('Logout #############', request.baseUrl);
+    if (request.session) {
+        // delete session object
+        request.session.destroy((err) => {
+          if(err) {
+            next(err);
+          } else {
+            response.redirect(`${request.baseUrl}/login`);
+          }
+        });
+      }
 
 })
 
@@ -24,6 +34,7 @@ router.post('/login', (request, response) => {
                     const secret = require('../config/keys').JWT_SECRET;
                     const token = jwt.sign(payload, secret, options);
                     request.session.token = token;
+                    request.session.loggedInUser = user;
                     // response.status(200).send(token);
                     const { baseUrl } = request;
                     response.redirect(`${baseUrl}/dashboard`);

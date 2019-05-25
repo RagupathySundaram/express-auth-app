@@ -10,8 +10,8 @@
 <body>
     <div class="container">
         <h1>Dashboard (Users List)</h1>
-        <h5>Hey you are Logged in !</h5>
-        <%= token %>
+        <h5>Hey you are Logged as - <strong><%=loggedInUser.name%></strong></h5>
+        <div style="width:90%"><%= token %></div>
             <table border="1">
                 <tr>
                     <th>Name</th>
@@ -33,10 +33,10 @@
                     <%});%>
             </table>
             <div>
-                <a href="/user">Go to Home </a>
+                <a href="<%= baseUrl%>">Go to Home </a>
             </div>
             <div>
-                <form action="/user/logout" method="post">
+                <form action="<%= baseUrl%>/logout" method="post">
                     Click here to Logout <button>Logout</button>
                 </form>
             </div>

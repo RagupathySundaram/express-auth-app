@@ -10,7 +10,7 @@
     <h1>Register -
         <%= baseUrl%>
     </h1>
-    <form action="/user/register" method="post">
+    <form action="<%= baseUrl%>/register" method="post">
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="name">Name:</label>
@@ -43,7 +43,7 @@
             </div>
         </div>
     </form>
-    Have An Account ? <a href="/user/login">Login</a>
+    Have An Account ? <a href="<%= baseUrl%>/login">Login</a>
 </div>
 
 </body>

@@ -55,7 +55,7 @@ router.post('/register', (request, response) => {
                         // Save the User                    
                         newUser.save()
                             .then(post => {
-                                response.redirect('/user/login')
+                                response.redirect(`${request.baseUrl}/login`)
                             })
                             .catch(err => {
                                 console.log('err', err);
@@ -87,10 +87,11 @@ router.get('/', (request, response) => {
     router.get('/dashboard', validateToken, (request, response) => {
         const { baseUrl, session } = request;
         console.log('token', session.token);
+        console.log('request', request);
         // response.render('dashboard', { baseUrl, users: ['Test'], token: 'XXXXXXXXXX' })
         User.find().then(users => {
                 // console.log('users', users);
-                response.render('dashboard', { baseUrl, users, token: session.token })
+                response.render('dashboard', { baseUrl, users, token: session.token, loggedInUser: request.session.loggedInUser })
             })
             .catch(err => {
                 console.log('err', err);
